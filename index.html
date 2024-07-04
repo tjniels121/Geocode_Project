@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geocode Address</title>
+</head>
+<body>
+    <form id="addressForm">
+        <input type="text" id="address" placeholder="Enter your address">
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        document.getElementById('addressForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const address = document.getElementById('address').value;
+            const response = await fetch('/findTerritory', { 
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ address })
+            });
+            const result = await response.json();
+            alert(`Territory: ${result.territory}`);
+        };
+    </script>
+</body>
+</html>
+
